@@ -1,0 +1,89 @@
+	<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head:: head" />
+<body>
+  <!--  BARRA DE NAVEGACAO -->
+  <!-- injetar o frament menu -->
+  <div th:replace="menu:: menu" />
+  
+  <!-- CONTEUDO DA PAGINA -->
+  <main class="container">
+    <a class="btn btn-primary active" role="button" th:href="@{/pessoas/new}">
+    <i class="bi bi-plus-square"></i>Pessoas</a>
+        
+    <class="bg-light p-5 rounded">
+    
+    <div class="row">
+        <form action="" method="POST">
+	        <div class="mb-4">
+	          <button class="btn btn-success" type="submit">find</button>
+	        </div>
+        </form>
+     </div>
+   
+    <div class="row">
+    
+	      <h2>Pessoas list:</h2>
+	      <table class="table table-striped table-bordered table-hover">
+	      <thead>
+	        <tr>
+	          <th>Id</th>
+	          <th>Nome</th>
+	          <th>Birthday</th>
+	          <th>Idade</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	    
+	        <tr th:each="pessoa: ${pessoaList}">
+	          <td th:text="${pessoa.id}"/>
+	          <td th:text="${pessoa.nome}"/>
+	          <td th:text="${pessoa.birthday}"/>
+	          <td th:text="${pessoa.idade}"/>
+	          
+	          <td>
+		          <a th:href="@{/pessoas/delete/{id}(id=${pessoa.Id})}">
+		            <i class="btn btn-dark" title="delete">Delete</i>
+		          </a>
+		            
+		          <a th:href="@{/pessoas/update/{id}(id=${pessoa.Id})}">
+		            <i class="btn btn-light" title="update">Update</i>
+		          </a>
+	          </td>
+	          
+	        </tr>
+	      </tbody>
+      	</table>
+      </div>
+      
+      
+      <!--LIST PERSON API TMDB-->
+   
+      
+       <div class="row">
+	      <h2>Pessoas list TMDB:</h2>
+	      <table class="table table-striped table-bordered table-hover">
+	      <thead>
+	        <tr>
+	          <th>Id</th>
+	          <th>Nome</th>
+	          <th>Popularity</th>
+	          <th>Imagem</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <tr th:each="person: ${person}">
+	          <td th:text="${person.id}"/>
+	          <td th:text="${person.name}"/>
+	          <td th:text="${person.popularity}"/>
+	          <td><img src="${person.profile_path}"/></td>
+	        </tr>
+	      </tbody>
+      	  </table>
+      </div>
+      
+    </div>
+  </main>
+  <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
